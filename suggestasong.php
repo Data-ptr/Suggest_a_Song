@@ -28,10 +28,10 @@
         
         if(isset($_GET['get_list']))
         {
-            $links = array();
-            $sql = 'SELECT * FROM `suggested_songs`;';
+            $links  = array();
+            $sql    = 'SELECT * FROM `suggested_songs`;';
             
-            $rows = $dbh->query($sql);
+            $rows   = $dbh->query($sql);
             
             foreach($rows as $row)
             {
@@ -42,14 +42,12 @@
         }
         else
         {
-        $sql = 'INSERT INTO `suggested_songs`(`video_code`) VALUES(:video_code);';
-        
-        $sth = $dbh->prepare($sql);
-        $sth->bindParam(':video_code', $_GET['youtube_link'], PDO::PARAM_STR);
-        $sth->execute();
+            $sql = 'INSERT INTO `suggested_songs`(`video_code`) VALUES(:video_code);';
+            
+            $sth = $dbh->prepare($sql);
+            $sth->bindParam(':video_code', $_GET['youtube_link'], PDO::PARAM_STR);
+            $sth->execute();
         }
-        
-        
         
         $dbh = null;
         
@@ -73,8 +71,7 @@
         
             function submitSuggestion()
             {
-                var videoLink           = $('#youtube_link').val();
-                var filteredVideoCode   = filterVideoCode(videoLink);
+                var filteredVideoCode = filterVideoCode($('#youtube_link').val());
                 
                 if(filteredVideoCode)
                 {
